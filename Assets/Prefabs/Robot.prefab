@@ -43,8 +43,9 @@ GameObject:
   - component: {fileID: 6039340054378523643}
   - component: {fileID: 3020528518260591853}
   - component: {fileID: 5152623705941703181}
-  - component: {fileID: 317064475618946928}
   - component: {fileID: 4124748480092119259}
+  - component: {fileID: 7539943474276063939}
+  - component: {fileID: 1622630699456083251}
   m_Layer: 6
   m_Name: Robot
   m_TagString: Enemy
@@ -60,7 +61,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5039235867638854142}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.9943214, z: -0, w: -0.10641907}
+  m_LocalRotation: {x: -0, y: -0.9943213, z: 0, w: -0.10642025}
   m_LocalPosition: {x: -31.985296, y: -21.064457, z: -31.090897}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -86,7 +87,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 1
+  m_Height: 1.5
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -103,8 +104,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
---- !u!135 &317064475618946928
-SphereCollider:
+  animator: {fileID: 7539943474276063939}
+--- !u!114 &4124748480092119259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5039235867638854142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acea79fc6d48cb445890bbc9c0c67e41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TotalHealth: 3
+--- !u!95 &7539943474276063939
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5039235867638854142}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6279292bc6ef975489fb1cfd46b244f8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!136 &1622630699456083251
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -121,22 +158,11 @@ SphereCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.48929965
-  m_Center: {x: 0.01854664, y: -0.016039208, z: -1.2871113e-10}
---- !u!114 &4124748480092119259
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5039235867638854142}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acea79fc6d48cb445890bbc9c0c67e41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TotalHealth: 3
+  serializedVersion: 2
+  m_Radius: 0.5975734
+  m_Height: 1.1951473
+  m_Direction: 1
+  m_Center: {x: -0.002043128, y: -0.05954874, z: -0.08723533}
 --- !u!1001 &2480252218818282635
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -147,7 +173,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 8ee6b4e96d25e3e4f9f31ed5e2666cdb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8ee6b4e96d25e3e4f9f31ed5e2666cdb, type: 3}
       propertyPath: m_LocalPosition.y
