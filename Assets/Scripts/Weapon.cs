@@ -6,10 +6,10 @@ using Unity.VisualScripting;
 public class Weapon : MonoBehaviour
 {
     [SerializeField] String enemyTag;
-    [SerializeField] int dealDamage;
     [SerializeField] ParticleSystem ShootVFX;
     [SerializeField] Animator animator;
     [SerializeField] ParticleSystem HitVFX;
+    [SerializeField] WeaponSO weaponSO;
 
     const String SHOOT_STRING = "Shoot";
 
@@ -23,7 +23,7 @@ public class Weapon : MonoBehaviour
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity))
         {
             Collider hitObject = hit.collider;
-            if (hitObject.tag == enemyTag) hitObject.GetComponent<EnemyHealth>().TakeDamage(dealDamage);
+            if (hitObject.tag == enemyTag) hitObject.GetComponent<EnemyHealth>().TakeDamage(weaponSO.Damage);
 
             Instantiate(HitVFX, hit.point, Quaternion.identity);
         }

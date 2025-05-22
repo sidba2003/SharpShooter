@@ -12,6 +12,6 @@ public class EnemyHealth : MonoBehaviour
 
     void CheckHealth()
     {
-        if (TotalHealth == 0) Destroy(gameObject);
+        if (TotalHealth <= 0) Destroy(gameObject);
     }
 }
