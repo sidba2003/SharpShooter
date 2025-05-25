@@ -5,18 +5,18 @@ using Unity.VisualScripting;
 
 public class Weapon : MonoBehaviour
 {
-    [SerializeField] String enemyTag;
     [SerializeField] ParticleSystem ShootVFX;
-    [SerializeField] Animator animator;
-    [SerializeField] ParticleSystem HitVFX;
     [SerializeField] WeaponSO weaponSO;
 
-    const String SHOOT_STRING = "Shoot";
+    private void Start()
+    {
+        ActiveWeapon.FireTimeIncrementor = weaponSO.FireRate;
+        ActiveWeapon.IsAutomatic = weaponSO.IsAutomatic;
+    }
 
-    void OnShoot()
+    public void Shoot(String enemyTag)
     {
         ShootVFX.Play();
-        animator.Play(SHOOT_STRING, 0, 0f);
 
         RaycastHit hit;
 
@@ -25,7 +25,7 @@ public class Weapon : MonoBehaviour
             Collider hitObject = hit.collider;
             if (hitObject.tag == enemyTag) hitObject.GetComponent<EnemyHealth>().TakeDamage(weaponSO.Damage);
 
-            Instantiate(HitVFX, hit.point, Quaternion.identity);
+            Instantiate(weaponSO.HitVFX, hit.point, Quaternion.identity);
         }
     }
 }
