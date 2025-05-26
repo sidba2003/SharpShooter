@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections;
+using UnityEditor.Animations;
 
 public class ActiveWeapon : MonoBehaviour
 {
@@ -12,6 +13,12 @@ public class ActiveWeapon : MonoBehaviour
     Weapon currentWeapon;
     public static float FireTimeIncrementor;
     public static bool IsAutomatic;
+    public static ActiveWeapon instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {
@@ -33,6 +40,20 @@ public class ActiveWeapon : MonoBehaviour
 
             FireAvailableTime += FireTimeIncrementor;
         }
+    }
+
+    public GameObject GetActiveWeaponDirectory()
+    {
+        // Gets the Camera Root
+        GameObject cameraRoot = GetComponent<Transform>().GetChild(0).gameObject;
+
+        // Returns the Active Weapon Directory Game Object
+        return cameraRoot.GetComponent<Transform>().GetChild(0).gameObject;
+    }
+
+    public void SetNewWeaponReference(Weapon newWeaponReference)
+    {
+        currentWeapon = newWeaponReference;
     }
 
     private IEnumerator FireMachineGun()

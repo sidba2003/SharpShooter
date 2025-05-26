@@ -1,0 +1,38 @@
+using UnityEngine;
+
+public class WeaponPickup : MonoBehaviour
+{
+    [SerializeField] GameObject MachineGunPrefab;
+    [SerializeField] GameObject PistolPrefab;
+
+    ActiveWeapon activeWeaponInstance;
+
+    private void Start()
+    {
+        activeWeaponInstance = ActiveWeapon.instance;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Destroy(this);
+
+        if (this.name == "Machine Gun Pickup")
+        {
+            ChangeWeapon(MachineGunPrefab);
+        } else if (this.name == "Pistol Pickup")
+        {
+            ChangeWeapon(PistolPrefab);
+        }
+    }
+
+    private void ChangeWeapon(GameObject NewWeapon)
+    {
+        Destroy(gameObject);
+
+        GameObject ActiveWeaponDirectory = activeWeaponInstance.GetActiveWeaponDirectory();
+        Destroy(ActiveWeaponDirectory.GetComponent<Transform>().GetChild(0).gameObject);
+
+        GameObject InstantiatedNewWeapon = Instantiate(NewWeapon, ActiveWeaponDirectory.transform);
+        activeWeaponInstance.SetNewWeaponReference(InstantiatedNewWeapon.GetComponent<Weapon>());
+    }
+}
