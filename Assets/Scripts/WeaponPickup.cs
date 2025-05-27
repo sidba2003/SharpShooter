@@ -14,7 +14,7 @@ public class WeaponPickup : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Destroy(this);
+        Destroy(gameObject);
 
         if (this.name == "Machine Gun Pickup")
         {
@@ -27,8 +27,6 @@ public class WeaponPickup : MonoBehaviour
 
     private void ChangeWeapon(GameObject NewWeapon)
     {
-        Destroy(gameObject);
-
         GameObject ActiveWeaponDirectory = activeWeaponInstance.GetActiveWeaponDirectory();
         Destroy(ActiveWeaponDirectory.GetComponent<Transform>().GetChild(0).gameObject);
 

@@ -14,6 +14,7 @@ public class ActiveWeapon : MonoBehaviour
     public static float FireTimeIncrementor;
     public static bool IsAutomatic;
     public static ActiveWeapon instance;
+    static float newAutomaticFireTime = 0f;
 
     private void Awake()
     {
@@ -27,8 +28,9 @@ public class ActiveWeapon : MonoBehaviour
 
     void OnShoot()
     {
-        if (IsAutomatic)
+        if (IsAutomatic & Time.time >= newAutomaticFireTime)
         {
+            newAutomaticFireTime = Time.time + FireTimeIncrementor;
             StartCoroutine(FireMachineGun());
         }
         else
@@ -38,7 +40,7 @@ public class ActiveWeapon : MonoBehaviour
             animator.Play(SHOOT_STRING, 0, 0f);
             currentWeapon.Shoot(enemyTag);
 
-            FireAvailableTime += FireTimeIncrementor;
+            FireAvailableTime = Time.time + FireTimeIncrementor;
         }
     }
 
@@ -54,6 +56,7 @@ public class ActiveWeapon : MonoBehaviour
     public void SetNewWeaponReference(Weapon newWeaponReference)
     {
         currentWeapon = newWeaponReference;
+        StopAllCoroutines();
     }
 
     private IEnumerator FireMachineGun()

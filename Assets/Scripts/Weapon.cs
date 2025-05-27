@@ -8,7 +8,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] ParticleSystem ShootVFX;
     [SerializeField] WeaponSO weaponSO;
 
-    private void Start()
+    void Start()
     {
         ActiveWeapon.FireTimeIncrementor = weaponSO.FireRate;
         ActiveWeapon.IsAutomatic = weaponSO.IsAutomatic;
