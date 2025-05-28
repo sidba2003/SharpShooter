@@ -4,6 +4,7 @@ public class WeaponPickup : MonoBehaviour
 {
     [SerializeField] GameObject MachineGunPrefab;
     [SerializeField] GameObject PistolPrefab;
+    [SerializeField] GameObject SniperRiflePrefab;
 
     ActiveWeapon activeWeaponInstance;
 
@@ -22,6 +23,9 @@ public class WeaponPickup : MonoBehaviour
         } else if (this.name == "Pistol Pickup")
         {
             ChangeWeapon(PistolPrefab);
+        } else if (this.name == "Sniper Rifle Pickup")
+        {
+            ChangeWeapon(SniperRiflePrefab);
         }
     }
 

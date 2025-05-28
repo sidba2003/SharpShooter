@@ -1,12 +1,14 @@
 using UnityEngine;
 using System;
 using System.Collections;
-using UnityEditor.Animations;
+using UnityEngine.UI;
 
 public class ActiveWeapon : MonoBehaviour
 {
     [SerializeField] String enemyTag;
     [SerializeField] Animator animator;
+    [SerializeField] GameObject ZoomEffectImage;
+    [SerializeField] float CameraFOVZoomIncrement;
 
     const String SHOOT_STRING = "Shoot";
     public float FireAvailableTime = 0f;
@@ -14,22 +16,31 @@ public class ActiveWeapon : MonoBehaviour
     public static float FireTimeIncrementor;
     public static bool IsAutomatic;
     public static ActiveWeapon instance;
-    static float newAutomaticFireTime = 0f;
+    static float newAutomaticFireTime;
+    public static bool CanZoom;
+    CameraInterface cameraInterface;
 
     private void Awake()
     {
         instance = this;
+
+        // Setting this value in the Start() method
+        // this is because sometimes this variable will have value > 9.0 even when game has just been started
+        newAutomaticFireTime = 0f;
     }
 
     private void Start()
     {
         currentWeapon = GetComponentInChildren<Weapon>();
+        cameraInterface = CameraInterface.instance;
     }
 
     void OnShoot()
     {
-        if (IsAutomatic & Time.time >= newAutomaticFireTime)
+        if (IsAutomatic)
         {
+            if (Time.time < newAutomaticFireTime) return;
+
             newAutomaticFireTime = Time.time + FireTimeIncrementor;
             StartCoroutine(FireMachineGun());
         }
@@ -41,6 +52,31 @@ public class ActiveWeapon : MonoBehaviour
             currentWeapon.Shoot(enemyTag);
 
             FireAvailableTime = Time.time + FireTimeIncrementor;
+        }
+    }
+
+    void OnZoom()
+    {
+        ZoomHandler();
+    }
+
+    void ZoomHandler()
+    {
+        if (!CanZoom) return;
+
+        GameObject SniperRifleReference = GetActiveWeaponDirectory().transform.GetChild(0).gameObject;
+        
+        if (ZoomEffectImage.activeInHierarchy)
+        {
+            SniperRifleReference.SetActive(true);
+            cameraInterface.ChangeFOV(CameraFOVZoomIncrement);
+            ZoomEffectImage.SetActive(false);
+        }
+        else
+        {
+            ZoomEffectImage.SetActive(true);
+            cameraInterface.ChangeFOV(-CameraFOVZoomIncrement);
+            SniperRifleReference.SetActive(false);
         }
     }
 

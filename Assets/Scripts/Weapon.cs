@@ -12,6 +12,7 @@ public class Weapon : MonoBehaviour
     {
         ActiveWeapon.FireTimeIncrementor = weaponSO.FireRate;
         ActiveWeapon.IsAutomatic = weaponSO.IsAutomatic;
+        ActiveWeapon.CanZoom = weaponSO.CanZoom;
     }
 
     public void Shoot(String enemyTag)

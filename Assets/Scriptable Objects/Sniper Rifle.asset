@@ -15,3 +15,5 @@ MonoBehaviour:
   HitVFX: {fileID: 4160422380805327246, guid: ac8abf83861ceae40832f6bdfe7c4ce0, type: 3}
   Damage: 5
   FireRate: 0.7
+  IsAutomatic: 0
+  CanZoom: 1

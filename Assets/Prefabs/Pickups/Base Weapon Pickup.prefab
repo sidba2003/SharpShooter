@@ -101,9 +101,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 311d52940f5cef9498ed6145945162f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActiveWeaponDirectory: {fileID: 0}
   MachineGunPrefab: {fileID: 1150933637570225888, guid: 482d9c1542979ff4b9ec3c6a85f2e567, type: 3}
   PistolPrefab: {fileID: 4428703383539728935, guid: fed9649c1a8fb0045af32cfb110a26be, type: 3}
+  SniperRiflePrefab: {fileID: 7258859696637254892, guid: 1035a73711a14ce4a9ab21b71acc5180, type: 3}
 --- !u!1 &5489050690690978907
 GameObject:
   m_ObjectHideFlags: 0
