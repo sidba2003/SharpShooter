@@ -7,6 +7,7 @@ public class Weapon : MonoBehaviour
 {
     [SerializeField] ParticleSystem ShootVFX;
     [SerializeField] WeaponSO weaponSO;
+    [SerializeField] LayerMask IgnoreMeWhileShooting;
 
     void Start()
     {
@@ -21,7 +22,7 @@ public class Weapon : MonoBehaviour
 
         RaycastHit hit;
 
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity))
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity, ~IgnoreMeWhileShooting))
         {
             Collider hitObject = hit.collider;
             if (hitObject.tag == enemyTag) hitObject.GetComponent<EnemyHealth>().TakeDamage(weaponSO.Damage);

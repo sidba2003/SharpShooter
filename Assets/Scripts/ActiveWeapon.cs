@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections;
 using UnityEngine.UI;
+using StarterAssets;
 
 public class ActiveWeapon : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class ActiveWeapon : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] GameObject ZoomEffectImage;
     [SerializeField] float CameraFOVZoomIncrement;
+    [SerializeField] float ZoomedInSensitivity;
 
     const String SHOOT_STRING = "Shoot";
     public float FireAvailableTime = 0f;
@@ -19,6 +21,7 @@ public class ActiveWeapon : MonoBehaviour
     static float newAutomaticFireTime;
     public static bool CanZoom;
     CameraInterface cameraInterface;
+    FirstPersonController firstPersonController;
 
     private void Awake()
     {
@@ -32,7 +35,9 @@ public class ActiveWeapon : MonoBehaviour
     private void Start()
     {
         currentWeapon = GetComponentInChildren<Weapon>();
+
         cameraInterface = CameraInterface.instance;
+        firstPersonController = FirstPersonController.instance;
     }
 
     void OnShoot()
@@ -71,12 +76,14 @@ public class ActiveWeapon : MonoBehaviour
             SniperRifleReference.SetActive(true);
             cameraInterface.ChangeFOV(CameraFOVZoomIncrement);
             ZoomEffectImage.SetActive(false);
+            firstPersonController.RotationSpeed = 1f;
         }
         else
         {
             ZoomEffectImage.SetActive(true);
             cameraInterface.ChangeFOV(-CameraFOVZoomIncrement);
             SniperRifleReference.SetActive(false);
+            firstPersonController.RotationSpeed = ZoomedInSensitivity;
         }
     }
 

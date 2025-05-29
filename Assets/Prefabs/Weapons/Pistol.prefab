@@ -48,6 +48,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShootVFX: {fileID: 3700061379510895075}
   weaponSO: {fileID: 11400000, guid: 937f3d47695ff404d82c84a43449b45e, type: 2}
+  IgnoreMeWhileShooting:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &5493353804799472559
 GameObject:
   m_ObjectHideFlags: 0

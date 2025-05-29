@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7306644157918529342}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 3408110153582945583}
   - component: {fileID: 318497449507043426}
   - component: {fileID: 7272796899973227600}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Base Weapon Pickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,6 +104,7 @@ MonoBehaviour:
   MachineGunPrefab: {fileID: 1150933637570225888, guid: 482d9c1542979ff4b9ec3c6a85f2e567, type: 3}
   PistolPrefab: {fileID: 4428703383539728935, guid: fed9649c1a8fb0045af32cfb110a26be, type: 3}
   SniperRiflePrefab: {fileID: 7258859696637254892, guid: 1035a73711a14ce4a9ab21b71acc5180, type: 3}
+  RotateSpeed: 20
 --- !u!1 &5489050690690978907
 GameObject:
   m_ObjectHideFlags: 0
@@ -115,7 +116,7 @@ GameObject:
   - component: {fileID: 747301429691484146}
   - component: {fileID: 4925297821187798489}
   - component: {fileID: 1824468603396787400}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -74,6 +74,8 @@ namespace StarterAssets
 
 		private const float _threshold = 0.01f;
 
+		public static FirstPersonController instance;
+
 		private bool IsCurrentDeviceMouse
 		{
 			get
@@ -93,6 +95,8 @@ namespace StarterAssets
 			{
 				_mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
 			}
+
+			instance = this;
 		}
 
 		private void Start()

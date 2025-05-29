@@ -5,6 +5,7 @@ public class WeaponPickup : MonoBehaviour
     [SerializeField] GameObject MachineGunPrefab;
     [SerializeField] GameObject PistolPrefab;
     [SerializeField] GameObject SniperRiflePrefab;
+    [SerializeField] float RotateSpeed;
 
     ActiveWeapon activeWeaponInstance;
 
@@ -27,6 +28,19 @@ public class WeaponPickup : MonoBehaviour
         {
             ChangeWeapon(SniperRiflePrefab);
         }
+    }
+
+    private void Update()
+    {
+        RotatePickup();
+    }
+
+    void RotatePickup()
+    {
+        Vector3 Rotation = transform.localEulerAngles;
+        Rotation.y = transform.localEulerAngles.y + (Time.deltaTime * RotateSpeed);
+
+        transform.localEulerAngles = Rotation;
     }
 
     private void ChangeWeapon(GameObject NewWeapon)

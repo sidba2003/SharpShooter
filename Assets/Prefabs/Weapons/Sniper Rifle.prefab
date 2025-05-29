@@ -80,6 +80,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShootVFX: {fileID: 6949137316536271624}
   weaponSO: {fileID: 11400000, guid: 669fc9d4b02d7d0439e32be680880a48, type: 2}
+  IgnoreMeWhileShooting:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1001 &408443261605294547
 PrefabInstance:
   m_ObjectHideFlags: 0
