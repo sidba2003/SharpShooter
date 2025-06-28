@@ -17,3 +17,4 @@ MonoBehaviour:
   FireRate: 0.7
   IsAutomatic: 0
   CanZoom: 1
+  ammoAmount: 5

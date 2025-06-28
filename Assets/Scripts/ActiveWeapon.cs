@@ -3,6 +3,8 @@ using System;
 using System.Collections;
 using UnityEngine.UI;
 using StarterAssets;
+using TMPro;
+using Cinemachine;
 
 public class ActiveWeapon : MonoBehaviour
 {
@@ -11,14 +13,19 @@ public class ActiveWeapon : MonoBehaviour
     [SerializeField] GameObject ZoomEffectImage;
     [SerializeField] float CameraFOVZoomIncrement;
     [SerializeField] float ZoomedInSensitivity;
+    [SerializeField] TextMeshProUGUI ammoUI;
 
+
+    public static CinemachineImpulseSource impulseSource;
     const String SHOOT_STRING = "Shoot";
     public float FireAvailableTime = 0f;
+    public static int AmmoCount = 0;
     Weapon currentWeapon;
     public static float FireTimeIncrementor;
     public static bool IsAutomatic;
     public static ActiveWeapon instance;
     static float newAutomaticFireTime;
+    public static int fullAmmoCapacity;
     public static bool CanZoom;
     CameraInterface cameraInterface;
     FirstPersonController firstPersonController;
@@ -42,6 +49,8 @@ public class ActiveWeapon : MonoBehaviour
 
     void OnShoot()
     {
+        if (currentWeapon == null) return;
+
         if (IsAutomatic)
         {
             if (Time.time < newAutomaticFireTime) return;
@@ -53,10 +62,27 @@ public class ActiveWeapon : MonoBehaviour
         {
             if (Time.time < FireAvailableTime) return;
 
+            if (AmmoCount == 0) return;
+
             animator.Play(SHOOT_STRING, 0, 0f);
             currentWeapon.Shoot(enemyTag);
 
+            impulseSource.GenerateImpulse();
+
+            AmmoCount -= 1;
+            UpdateAmmoUI();
+
             FireAvailableTime = Time.time + FireTimeIncrementor;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Ammo Box"))
+        {
+            AmmoCount = fullAmmoCapacity;
+            UpdateAmmoUI();
+            Destroy(other.gameObject);
         }
     }
 
@@ -100,18 +126,29 @@ public class ActiveWeapon : MonoBehaviour
     {
         currentWeapon = newWeaponReference;
         StopAllCoroutines();
+        UpdateAmmoUI();
     }
 
     private IEnumerator FireMachineGun()
     {
-        while (Input.GetKey(KeyCode.Mouse0))
+        while (Input.GetKey(KeyCode.Mouse0) && AmmoCount > 0)
         {
             animator.Play(SHOOT_STRING, 0, 0f);
             currentWeapon.Shoot(enemyTag);
+
+            impulseSource.GenerateImpulse();
+
+            AmmoCount -= 1;
+            UpdateAmmoUI();
 
             yield return new WaitForSeconds(FireTimeIncrementor);
         }
 
         yield return null;
+    }
+
+    public void UpdateAmmoUI()
+    {
+        ammoUI.text = AmmoCount.ToString("D2");
     }
 }

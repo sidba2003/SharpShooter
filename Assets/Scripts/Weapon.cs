@@ -1,7 +1,6 @@
 using UnityEngine;
 using System;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using Cinemachine;
 
 public class Weapon : MonoBehaviour
 {
@@ -9,11 +8,22 @@ public class Weapon : MonoBehaviour
     [SerializeField] WeaponSO weaponSO;
     [SerializeField] LayerMask IgnoreMeWhileShooting;
 
+    ActiveWeapon instance;
+
     void Start()
     {
+        instance = ActiveWeapon.instance;
+        CinemachineImpulseSource impulseSource = GetComponent<CinemachineImpulseSource>();
+
         ActiveWeapon.FireTimeIncrementor = weaponSO.FireRate;
         ActiveWeapon.IsAutomatic = weaponSO.IsAutomatic;
         ActiveWeapon.CanZoom = weaponSO.CanZoom;
+        ActiveWeapon.fullAmmoCapacity = weaponSO.ammoAmount;
+
+        ActiveWeapon.impulseSource = impulseSource;
+
+        ActiveWeapon.AmmoCount = weaponSO.ammoAmount;
+        instance.UpdateAmmoUI();
     }
 
     public void Shoot(String enemyTag)

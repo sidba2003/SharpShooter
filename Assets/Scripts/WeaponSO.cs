@@ -10,4 +10,5 @@ public class WeaponSO : ScriptableObject
     public float FireRate = 0.5f;
     public bool IsAutomatic = false;
     public bool CanZoom = false;
+    public int ammoAmount = 30;
 }

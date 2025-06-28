@@ -46,7 +46,11 @@ public class WeaponPickup : MonoBehaviour
     private void ChangeWeapon(GameObject NewWeapon)
     {
         GameObject ActiveWeaponDirectory = activeWeaponInstance.GetActiveWeaponDirectory();
-        Destroy(ActiveWeaponDirectory.GetComponent<Transform>().GetChild(0).gameObject);
+
+        if (ActiveWeaponDirectory.GetComponent<Transform>().childCount > 0)
+        {
+            Destroy(ActiveWeaponDirectory.GetComponent<Transform>().GetChild(0).gameObject);
+        }
 
         GameObject InstantiatedNewWeapon = Instantiate(NewWeapon, ActiveWeaponDirectory.transform);
         activeWeaponInstance.SetNewWeaponReference(InstantiatedNewWeapon.GetComponent<Weapon>());
