@@ -8,6 +8,8 @@ TagManager:
   - Robot
   - Enemy
   - Ammo Box
+  - Portal
+  - Turret
   layers:
   - Default
   - TransparentFX

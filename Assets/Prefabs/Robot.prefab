@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94c17160d550d2e4e9cddd33616bd559, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 5662427721985432364, guid: abf61dd88cf78704ebec6ac0ea71ebfc, type: 3}
   animator: {fileID: 7539943474276063939}
 --- !u!114 &4124748480092119259
 MonoBehaviour:
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acea79fc6d48cb445890bbc9c0c67e41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TotalHealth: 3
+  TotalHealth: 10
   explosionVFX: {fileID: 7974772481883854997, guid: 2f6201063922e6b428cc5aa30e7a57be, type: 3}
 --- !u!95 &7539943474276063939
 Animator:

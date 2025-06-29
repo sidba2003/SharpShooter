@@ -4,11 +4,11 @@ using UnityEngine.AI;
 namespace RobotController{
     public class Robot : MonoBehaviour
     {
-        [SerializeField] Transform target;
         [SerializeField] Animator animator;
 
         NavMeshAgent agent;
         EnemyHealth enemyHealth;
+        Transform target;
 
         void Awake()
         {
@@ -17,6 +17,7 @@ namespace RobotController{
 
         private void Start()
         {
+            target = GameObject.FindGameObjectWithTag("Player").transform;
             enemyHealth = GetComponent<EnemyHealth>();
         }
 

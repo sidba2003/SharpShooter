@@ -9,6 +9,8 @@ public class Weapon : MonoBehaviour
     [SerializeField] LayerMask IgnoreMeWhileShooting;
 
     ActiveWeapon instance;
+    String PortalTag = "Portal";
+    String TurretTag = "Turret";
 
     void Start()
     {
@@ -35,7 +37,10 @@ public class Weapon : MonoBehaviour
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity, ~IgnoreMeWhileShooting))
         {
             Collider hitObject = hit.collider;
+
             if (hitObject.tag == enemyTag) hitObject.GetComponent<EnemyHealth>().TakeDamage(weaponSO.Damage);
+            if (hitObject.tag == PortalTag) hitObject.GetComponent<Portal>().TakeDamage(weaponSO.Damage);
+            if (hitObject.tag == TurretTag) hitObject.GetComponentInParent<Turret>().TakeDamage(weaponSO.Damage);
 
             Instantiate(weaponSO.HitVFX, hit.point, Quaternion.identity);
         }
