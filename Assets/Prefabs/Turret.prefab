@@ -460,10 +460,11 @@ MonoBehaviour:
   playerCameraRoot: {fileID: 0}
   turretHead: {fileID: 7435154797885429259}
   explosionVFX: {fileID: 7974772481883854997, guid: 2f6201063922e6b428cc5aa30e7a57be, type: 3}
-  projectileCooldown: 0
-  ProjectileSpawnPoint: {fileID: 0}
-  ProjectileObject: {fileID: 0}
+  projectileCooldown: 2
+  ProjectileSpawnPoint: {fileID: 422588117204327419}
+  ProjectileObject: {fileID: 2787097561686943458, guid: d89b71402bcf60a47bf4122ffa3f2f24, type: 3}
   health: 15
+  Shooter: {fileID: 1911030002434123489}
 --- !u!1 &8186351821252715744
 GameObject:
   m_ObjectHideFlags: 0

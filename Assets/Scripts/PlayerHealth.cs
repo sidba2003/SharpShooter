@@ -1,7 +1,7 @@
 using Cinemachine;
 using System.Collections;
-using UnityEditor.Rendering.BuiltIn.ShaderGraph;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
@@ -13,17 +13,38 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] float FadeOutScreenDuration;
     [SerializeField] GameObject enemiesParent;
     [SerializeField] GameObject portalsParent;
+    [SerializeField] GameObject gameOverUI;
 
     int PlayerDeathTransitionCameraPriority = 20;
     public static PlayerHealth instance;
     Slider healthSlider;
+    bool coroutineRunning = false;
+    bool gameEnded = false;
 
     private void Awake()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
         instance = this;
 
         healthSlider = GetComponent<Slider>();
         healthSlider.value = 1;
+    }
+
+    private void Update()
+    {
+        if (gameEnded && !coroutineRunning) 
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            gameOverUI.SetActive(true);
+        }
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(0);
     }
 
     public void TakeDamage(float amount)
@@ -42,6 +63,8 @@ public class PlayerHealth : MonoBehaviour
             weaponCamera.transform.SetParent(null);
             Destroy(player);
 
+            coroutineRunning = true;
+            gameEnded = true;
             StartCoroutine(FadeOutScreenCoroutine());
             deathCamera.Priority = PlayerDeathTransitionCameraPriority;
         }
@@ -68,6 +91,7 @@ public class PlayerHealth : MonoBehaviour
             yield return null;
         }
 
+        coroutineRunning = false;
         yield return null;
     }
 }
